@@ -48,7 +48,7 @@ def _save_predictions(pred: np.ndarray, output_path: Path) -> None:
             json.dump(pred_f64.tolist(), f, ensure_ascii=False, indent=2)
         return
 
-    # txt/csv: one value per line
+  
     np.savetxt(output_path, pred_f64, fmt="%.6f")
 
 
@@ -90,11 +90,11 @@ def run(argv: list[str] | None = None) -> int:
         print(f"ERROR: {e}")
         return EXIT_NOT_FOUND
     except (ValueError, np.linalg.LinAlgError) as e:
-        # invalid input array / shape mismatch / numerical error
+       
         print(f"ERROR: {e}")
         return EXIT_PREDICT
     except SystemExit as e:
-        # argparse may raise SystemExit on bad args
+        
         code = int(e.code) if isinstance(e.code, int) else EXIT_USAGE
         return code if code != 0 else EXIT_USAGE
     except Exception as e:
@@ -103,7 +103,7 @@ def run(argv: list[str] | None = None) -> int:
 
 
 def _parse_args_from(argv: list[str]) -> argparse.Namespace:
-    # helper to make run(argv) testable without touching sys.argv
+    
     parser = argparse.ArgumentParser(
         prog="hh-salary-model",
         description="Predict salaries (RUB) from x_data.npy using saved linear regression weights.",
@@ -125,5 +125,5 @@ def _parse_args_from(argv: list[str]) -> argparse.Namespace:
 
 
 def main() -> int:
-    # keep a main() with stable signature for "python -m" or app wrapper
+   
     return run()
