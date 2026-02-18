@@ -30,7 +30,7 @@ class LinearRegressionModel:
         if x.shape[0] != y.shape[0]:
             raise ValueError("x and y must have the same number of rows")
 
-        # y = X@coef + intercept
+      
         ones = np.ones((x.shape[0], 1), dtype=np.float64)
         x_aug = np.hstack([x, ones])
 
